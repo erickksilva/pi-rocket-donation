@@ -1,30 +1,29 @@
 package com.rocketdonation.domain.postagem;
 
 import com.rocketdonation.domain.organizacao.Organizacao;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
-public class Postagem {
+public class Noticia {
 
     @Id
-    private Long idPost;
+    private Long idNoticia;
 
     @NotBlank(message = "Insira o titulo.")
     @Length(max = 60, message = "O titulo deve conter no máximo {max} caracteres.")
     private String titulo;
 
-    private Date dataPost;
+    private Date dataNoticia;
 
     @NotBlank(message = "Insira a primeira parte da noticia.")
     @Length(max = 1000, message = "A primeira parte da noticia deve conter no máximo {max} caracteres.")
@@ -38,8 +37,8 @@ public class Postagem {
     @Length(max = 150, message = "A url deve conter no máximo {max} caracteres.")
     private String imgUrl;
 
-    @ManyToOne
-    @JoinColumn(name = "organizacao_id")
-    private Organizacao organizacao_id;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_email_org")
+    private Organizacao fkEmailOrg;
 
 }

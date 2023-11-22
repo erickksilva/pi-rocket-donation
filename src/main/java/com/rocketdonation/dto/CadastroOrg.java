@@ -14,6 +14,8 @@ public record CadastroOrg(
         String rua,
 
         Integer numero,
+
+        String zona,
         String complemento,
 
         String agenciaConta,

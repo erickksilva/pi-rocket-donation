@@ -1,15 +1,15 @@
 package com.rocketdonation.domain.organizacao;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
-import lombok.Data;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,6 +32,10 @@ public class ContaBancaria {
     @NotBlank(message = "Insira a chave pix.")
     @Length(max = 150, message = "A chave deve conter no máximo {max} caracteres ou números.")
     private String chavePix;
+
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "fk_email_org")
+//    private Organizacao emailOrg;
 
     public ContaBancaria(String agenciaConta, String numeroConta, String chavePix) {
         this.agenciaConta = agenciaConta;

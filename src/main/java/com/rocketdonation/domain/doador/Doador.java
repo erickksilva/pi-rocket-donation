@@ -1,14 +1,14 @@
 package com.rocketdonation.domain.doador;
 
-import com.rocketdonation.domain.organizacao.Endereco;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
+import com.rocketdonation.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,6 +18,11 @@ public class Doador {
 
     @Id
     private String email;
+
+    @OneToOne
+    @JoinColumn(name = "email", referencedColumnName = "email") // Estabelece o relacionamento com a classe User
+    @MapsId
+    private User user;
 
     @NotBlank(message = "Insira o nome.")
     @Length(max = 35, message = "O primeiro nome deve conter no máximo {max} caracteres.")
@@ -32,8 +37,6 @@ public class Doador {
     @Pattern(regexp = "^\\(\\d{2}\\)\\s\\d{9}$", message = "Formato do telefone inválido.")
     private String telefone;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
-    private Endereco enderecoCep;
 
 
 }
